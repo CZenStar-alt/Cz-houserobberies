@@ -13,12 +13,12 @@ local function Resetobject(house)
     CreateThread(function()
         Wait(Config.HouseTimer * 60000)
          Config.Houses[house]['loot'].taken = false
-        TriggerClientEvent('md-houserobbery:client:ResetHouseState', -1, house, k, false)
+        TriggerClientEvent('cz-houserobbery:client:ResetHouseState', -1, house, k, false)
     end)
 end
 
 -- Callbacks
-RegisterNetEvent('md-houserobbery:server:accessbreak', function(tier)
+RegisterNetEvent('cz-houserobbery:server:accessbreak', function(tier)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local luck = math.random(1,100)
@@ -74,39 +74,39 @@ RegisterNetEvent('Cz-houserobberies:server:loseloot', function(item)
     end
 end)
 
-QBCore.Functions.CreateCallback('md-houserobbery:server:GetHouseConfig', function(_, cb)
+QBCore.Functions.CreateCallback('cz-houserobbery:server:GetHouseConfig', function(_, cb)
     cb(Config.Houses)
 end)
 
 -- Events
-RegisterNetEvent('md-houserobbery:server:closeHouse', function(house)
-    TriggerClientEvent('md-houserobbery:client:ResetHouseState', -1, house)
+RegisterNetEvent('cz-houserobbery:server:closeHouse', function(house)
+    TriggerClientEvent('cz-houserobbery:client:ResetHouseState', -1, house)
 end)    
-RegisterNetEvent('md-houserobbery:server:SetBusyState', function(lootspot, house, bool)
+RegisterNetEvent('cz-houserobbery:server:SetBusyState', function(lootspot, house, bool)
     Config.Houses[house]['loot'][lootspot] = bool
-    TriggerClientEvent('md-houserobbery:client:SetBusyState', -1, lootspot, house, bool)
+    TriggerClientEvent('cz-houserobbery:client:SetBusyState', -1, lootspot, house, bool)
 end)
 
-RegisterNetEvent('md-houserobbery:server:enterHouse', function(house)
+RegisterNetEvent('cz-houserobbery:server:enterHouse', function(house)
     local src = source
     if not Config.Houses[house]['spawned'] then
         ResetHouseStateTimer(house)
-        TriggerClientEvent('md-houserobbery:client:setHouseState', -1, house, true)
+        TriggerClientEvent('cz-houserobbery:client:setHouseState', -1, house, true)
     end
-    TriggerClientEvent('md-houserobbery:client:enterHouse', src, house)
+    TriggerClientEvent('cz-houserobbery:client:enterHouse', src, house)
     Config.Houses[house]['spawned'] = true
 end)
 
-RegisterNetEvent('md-houserobbery:server:setlootused', function(house, k)
+RegisterNetEvent('cz-houserobbery:server:setlootused', function(house, k)
     local src = source 
     if not Config.Houses[house]['loot'][k].taken then
         Resetobject(house)
-        TriggerClientEvent('md-houserobbery:client:SetLootState', -1, house, k, true)
+        TriggerClientEvent('cz-houserobbery:client:SetLootState', -1, house, k, true)
     end
     Config.Houses[house]['loot'][k].taken = true
 end)
 
-RegisterNetEvent('md-houserobbery:server:GetLoot', function(tier, rewardtype, objectCoords)
+RegisterNetEvent('cz-houserobbery:server:GetLoot', function(tier, rewardtype, objectCoords)
     local src = source
     local Player = QBCore.Functions.GetPlayer(src)
     local playerCoords = GetEntityCoords(GetPlayerPed(src))

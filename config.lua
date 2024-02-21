@@ -24,15 +24,15 @@ Config.FenceWeapontwo = "weapon_rpg"-- what weapon the fence gets when you assau
 Config.OxTarget = false
 Config.Rewards = { -- the numbers in boxes translate to which tier of house and their loot. 1 = tier 1,  2 = tier 2, if that doesnt make sense hire a dev
     [1] = {
-        cabinet = 	 {"bandage", "diamond_ring", "goldchain", "weed_skunk", "thermite", "cryptostick"},
+        cabinet = 	 {"bandage", "diamond_ring", "goldchain", "weed_skunk", "cryptostick"},
         kitchen =    {"tosti", "sandwich", "twerks_candy", 'kurkakola'},
-        art =        {"bandage", "rolex", "diamond_ring", "goldchain", "thermite", "cryptostick", "tablet", "pistol_ammo"}
+        art =        {"bandage", "rolex", "diamond_ring", "goldchain", "cryptostick", "vpn", "weapon_knife"}
     },
 	
 	[2] = {
-		cabin =      {"advancedlockpick", "diamond_ring", "goldchain", "thermite", "cryptostick", "advancedrepairkit"},
+		cabin =      {"advancedlockpick", "diamond_ring", "goldchain", "thermite", "cryptostick"},
 		kitchen =    {"tosti", "sandwich", "goldchain"},
-		chest =      {"advancedlockpick", "advancedrepairkit", "diamond_ring", "goldchain", "xtcbaggy", "cryptostick", "weapon_knife"},
+		chest =      {"advancedlockpick", "advancedrepairkit", "diamond_ring", "goldchain", "xtcbaggy", "cryptostick", "pistol_ammo"},
     },
 	[3] = {
 	   art =     	{'art1', 'art2', "goldchain"},
@@ -49,13 +49,13 @@ Config.Rewards = { -- the numbers in boxes translate to which tier of house and 
 	[5] = {
         kitchen =   {"tosti", "sandwich", "twerks_candy", 'kurkakola'},
         art =       {'art1', 'art2', 'art3', 'art4', 'art5',},
-        electronic ={"electronickit", "boombox", "mdspeakers", "mdtablet", "mddesktop", "laptop", "tablet", 'checkbook'}
+        electronic ={"electronickit", "boombox", "czspeakers", "cztablet", "czdesktop", "laptop", "tablet", 'checkbook'}
     },
 	[6] = {
         kitchen =  {"tosti", "sandwich", "goldchain"},
         art =      {'art1', 'art2', 'art3', 'art4', 'art5', 'art6', 'art7'},
         valuables ={"rolex", "diamond_ring", "goldchain",'checkbook', 'art2', 'art3', 'art4', 'art5', 'art6', 'art7','checkbook'},
-        electronic ={"rolex", "diamond_ring", "goldchain",'mdmonitor', 'mdtablet', 'mdspeakers', 'laptop', 'mddesktop'}
+        electronic ={"rolex", "diamond_ring", "goldchain",'mdmonitor', 'cztablet', 'czspeakers', 'darklaptop', 'czdesktop'}
     },
 }
 
@@ -80,13 +80,15 @@ Config.ItemAmounts = { --
 ['kurkakola'] = 2,
 ['laptop'] = 2,
 ['mansionlaptop'] = 2,
-['mddesktop'] = 2,
+['darklaptop'] = 2,
+['vpn'] = 2,
+['czdesktop'] = 2,
 ['mdmonitor'] = 2,
-['mdtablet'] = 2,
+['cztablet'] = 2,
 ['pistol_ammo'] = 2,
 ['rolex'] = 2,
 ['sandwich'] = 2,
-['mdspeakers'] = 2,
+['czspeakers'] = 2,
 ['tablet'] = 2,
 ['thermite'] = 2,
 ['tosti'] = 2,
@@ -279,8 +281,8 @@ Config.BlackMarket = {
     [18] = {item = 'electronickit', minvalue = 10, maxvalue = 30, successchance = 90},
     [19] = {item = 'boombox',       minvalue = 10, maxvalue = 30, successchance = 90},
     [20] = {item = 'speaker',       minvalue = 10, maxvalue = 30, successchance = 90},
-    [21] = {item = 'mdtablet',      minvalue = 10, maxvalue = 30, successchance = 90},
-    [22] = {item = 'mddesktop',     minvalue = 10, maxvalue = 30, successchance = 90},
+    [21] = {item = 'cztablet',      minvalue = 10, maxvalue = 30, successchance = 90},
+    [22] = {item = 'czdesktop',     minvalue = 10, maxvalue = 30, successchance = 90},
     [23] = {item = 'laptop',        minvalue = 10, maxvalue = 30, successchance = 90},
     [24] = {item = 'speaker',       minvalue = 10, maxvalue = 30, successchance = 90},
     [25] = {item = 'mdmonitor',     minvalue = 10, maxvalue = 30, successchance = 90},

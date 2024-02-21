@@ -101,7 +101,7 @@ local function enterRobberyHouse(house)
             end
             SetEntityHeading(k, v.rotation)
             FreezeEntityPosition(k,true)
-            TriggerEvent('md-houserobbery:client:deleteobject', k)
+            TriggerEvent('cz-houserobbery:client:deleteobject', k)
             exports['qb-target']:AddTargetEntity(k, { -- 963.37, -2122.95, 31.47
 	        debugPoly = false,
 		    options = {
@@ -122,8 +122,8 @@ local function enterRobberyHouse(house)
                                 if success then
                                     ClearPedTasks(PlayerPedId())
 						            DeleteObject(k)
-                                    TriggerServerEvent('md-houserobbery:server:setlootused', house, v.num)
-                                    TriggerServerEvent('md-houserobbery:server:GetLoot', Config.Houses[house].tier, v.type, objectCoords)
+                                    TriggerServerEvent('cz-houserobbery:server:setlootused', house, v.num)
+                                    TriggerServerEvent('cz-houserobbery:server:GetLoot', Config.Houses[house].tier, v.type, objectCoords)
                                 else
                                    QBCore.Functions.Notify("Dude You Cant Even Do This, C'mon", "error")
                                 end
@@ -155,17 +155,17 @@ local function enterRobberyHouse(house)
 end
 
 RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()
-    QBCore.Functions.TriggerCallback('md-houserobbery:server:GetHouseConfig', function(HouseConfig)
+    QBCore.Functions.TriggerCallback('cz-houserobbery:server:GetHouseConfig', function(HouseConfig)
         Config.Houses = HouseConfig
     end)
 end)
 
-RegisterNetEvent('md-houserobbery:client:deleteobject', function(k, house)
+RegisterNetEvent('cz-houserobbery:client:deleteobject', function(k, house)
    Wait(Config.HouseTimer * 60000)
     DeleteObject(k)
 end)
 
-RegisterNetEvent('md-houserobbery:client:ResetHouseState', function(house)
+RegisterNetEvent('cz-houserobbery:client:ResetHouseState', function(house)
     Config.Houses[house]['spawned'] = false
 end)
 
@@ -174,11 +174,11 @@ RegisterNetEvent('police:SetCopCount', function(amount)
     CurrentCops = amount
 end)
 
-RegisterNetEvent('md-houserobbery:client:enterHouse', function(house)
+RegisterNetEvent('cz-houserobbery:client:enterHouse', function(house)
     enterRobberyHouse(house)
 end)
 
-RegisterNetEvent('md-houserobbery:client:setHouseState', function(house, state)
+RegisterNetEvent('cz-houserobbery:client:setHouseState', function(house, state)
     Config.Houses[house]['spawned'] = state
     local chance = math.random(1,100)
     local weaponchance = math.random(1,100)
@@ -230,11 +230,11 @@ RegisterNetEvent('md-houserobbery:client:setHouseState', function(house, state)
 end)
 
 
-RegisterNetEvent('md-houserobbery:client:SetLootState', function(house, k, state)
+RegisterNetEvent('cz-houserobbery:client:SetLootState', function(house, k, state)
     Config.Houses[house]['loot'][k].taken = state
 end)
 
-RegisterNetEvent('md-houserobbery:client:SetBusyState', function(lootspot, house, bool)
+RegisterNetEvent('cz-houserobbery:client:SetBusyState', function(lootspot, house, bool)
     Config.Houses[house]['loot'][lootspot] = bool
 end)
 
@@ -302,7 +302,7 @@ CreateThread(function()
                         disableCombat = true,
                         disableInventory = true,
                     }, {}, {}, {}, function()
-                    TriggerServerEvent('md-houserobbery:server:closeHouse', k)
+                    TriggerServerEvent('cz-houserobbery:server:closeHouse', k)
                     end)
                 end,
                 canInteract = function()
@@ -318,7 +318,7 @@ CreateThread(function()
                         if QBCore.Functions.HasItem('lockpick') then
                             exports['ps-ui']:Circle(function(success)
                                 if success then
-                                    TriggerServerEvent('md-houserobbery:server:enterHouse', k)
+                                    TriggerServerEvent('cz-houserobbery:server:enterHouse', k)
                                     if 20 <= math.random(1,100) then
                                         TriggerServerEvent("InteractSound_SV:PlayWithinDistance", 150.0, "siren", 0.5)
                                         PoliceCall()
@@ -334,13 +334,13 @@ CreateThread(function()
                         if QBCore.Functions.HasItem('houselaptop') then
                             exports['ps-ui']:VarHack(function(success)
                                 if success then
-                                    TriggerServerEvent('md-houserobbery:server:enterHouse', k)
+                                    TriggerServerEvent('cz-houserobbery:server:enterHouse', k)
                                     if 20 <= math.random(1,100) then
                                         TriggerServerEvent("InteractSound_SV:PlayWithinDistance", 150.0, "siren", 0.5)
                                         PoliceCall()
                                     end
                                 else
-                                    TriggerServerEvent('md-houserobbery:server:accessbreak', Config.Houses[k]['tier'] )
+                                    TriggerServerEvent('cz-houserobbery:server:accessbreak', Config.Houses[k]['tier'] )
                                     QBCore.Functions.Notify("Its Just Some Numbers In Order It Isnt Hard","error")
                                 end
                             end,5, 8)
@@ -351,13 +351,13 @@ CreateThread(function()
                         if QBCore.Functions.HasItem('mansionlaptop') then
                             exports['ps-ui']:Scrambler(function(success)
                                 if success then
-                                  TriggerServerEvent('md-houserobbery:server:enterHouse', k)
+                                  TriggerServerEvent('cz-houserobbery:server:enterHouse', k)
                                     if 20 <= math.random(1,100) then
                                         TriggerServerEvent("InteractSound_SV:PlayWithinDistance", 150.0, "siren", 0.5)
                                         PoliceCall()
                                     end
                                 else
-                                    TriggerServerEvent('md-houserobbery:server:accessbreak', Config.Houses[k]['tier'] )
+                                    TriggerServerEvent('cz-houserobbery:server:accessbreak', Config.Houses[k]['tier'] )
                                     QBCore.Functions.Notify("Yeah This One Is Hard","error")
                                 end
                             end,"numeric", 15, 0)
@@ -454,7 +454,7 @@ CreateThread(function()
                         disableCombat = true,
                         disableInventory = true,
                     }, {}, {}, {}, function()
-                    TriggerServerEvent('md-houserobbery:server:closeHouse', k)
+                    TriggerServerEvent('cz-houserobbery:server:closeHouse', k)
                     end)
                 end,
                 canInteract = function()
@@ -471,7 +471,7 @@ CreateThread(function()
                         if QBCore.Functions.HasItem('lockpick') then
                             exports['ps-ui']:Circle(function(success)
                                 if success then
-                                    TriggerServerEvent('md-houserobbery:server:enterHouse', k)
+                                    TriggerServerEvent('cz-houserobbery:server:enterHouse', k)
                                     if 20 <= math.random(1,100) then
                                         TriggerServerEvent("InteractSound_SV:PlayWithinDistance", 150.0, "siren", 0.5)
                                         PoliceCall()
@@ -487,13 +487,13 @@ CreateThread(function()
                         if QBCore.Functions.HasItem('houselaptop') then
                             exports['ps-ui']:VarHack(function(success)
                                 if success then
-                                    TriggerServerEvent('md-houserobbery:server:enterHouse', k)
+                                    TriggerServerEvent('cz-houserobbery:server:enterHouse', k)
                                     if 20 <= math.random(1,100) then
                                         TriggerServerEvent("InteractSound_SV:PlayWithinDistance", 150.0, "siren", 0.5)
                                         PoliceCall()
                                     end
                                 else
-                                    TriggerServerEvent('md-houserobbery:server:accessbreak', Config.Houses[k]['tier'] )
+                                    TriggerServerEvent('cz-houserobbery:server:accessbreak', Config.Houses[k]['tier'] )
                                     QBCore.Functions.Notify("Its Just Some Numbers In Order It Isnt Hard","error")
                                 end
                             end,5, 8)
@@ -504,13 +504,13 @@ CreateThread(function()
                         if QBCore.Functions.HasItem('mansionlaptop') then
                             exports['ps-ui']:Scrambler(function(success)
                                 if success then
-                                  TriggerServerEvent('md-houserobbery:server:enterHouse', k)
+                                  TriggerServerEvent('cz-houserobbery:server:enterHouse', k)
                                     if 20 <= math.random(1,100) then
                                         TriggerServerEvent("InteractSound_SV:PlayWithinDistance", 150.0, "siren", 0.5)
                                         PoliceCall()
                                     end
                                 else
-                                    TriggerServerEvent('md-houserobbery:server:accessbreak', Config.Houses[k]['tier'] )
+                                    TriggerServerEvent('cz-houserobbery:server:accessbreak', Config.Houses[k]['tier'] )
                                     QBCore.Functions.Notify("Yeah This One Is Hard","error")
                                 end
                             end,"numeric", 15, 0)
