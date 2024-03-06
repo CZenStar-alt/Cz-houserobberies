@@ -1,9 +1,9 @@
-name "Cz-houserobberies"
-author "Czen Star"
-description "Engage in house robberies to steal valuable items. Plan your heists, break into homes, and evade law enforcement to profit from your criminal activities. Use strategic thinking and stealth to succeed in your illicit endeavors."
+name "Cz-houserobberies v2"
+author "Mustache Dom"
+description "Steal Things From Houses"
 fx_version 'cerulean'
 game 'gta5'
-version '1.0.0'
+version '2.1.0'
 
 shared_scripts {
     'config.lua',

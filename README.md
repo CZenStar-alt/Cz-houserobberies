@@ -2,7 +2,7 @@
 
 <div align="center">
   <a href="https://discord.gg/deWH6JVDxK">
-    <img align="center" src="https://cdn.discordapp.com/attachments/1164709522691076120/1185676859363557457/Discord_logo.svg.png?ex=65907aa0&is=657e05a0&hm=dd2a8924c3a3d84507747ab2bac036e5fc219c697e084c9aa13ba468ff725bde&" width="100">
+    <img align="center" src="https://logopoppin.com/wp-content/uploads/2021/09/discord-logo-current.jpg" width="100">
   </a><br>
   <a href="https://discord.gg/deWH6JVDxK">CZ Scripts HUB Discord</a><br>
 </div>
@@ -14,13 +14,15 @@
 
 - [ps-ui](https://github.com/Project-Sloth/ps-ui)
 
+- [ps-dispatch](https://github.com/Project-Sloth/ps-dispatch)
+
 - [k4mb1 free shells](https://forum.cfx.re/t/free-props-starter-shells-for-housing-scripts/4826922)
 
-- [ability to read a readme](https://www.hookedonphonics.com/)
 ## NOTE
-**if you are getting a qb-target error, the recently did a change and it ended up breaking something and i have not figured it out yet. I highly recommend using either ox_target(big better anyway) or an older qb-target (any with the blue eye works)**
+**QB-Target Issue Fixed**
   
-## How to install like a boss
+## Installation
+
 **step 1**
 
 - delete qb-houserobbery
@@ -43,30 +45,23 @@
 ["checkbook"] 	   = {["name"] = "checkbook",        	["label"] = "Check Book",	 			["weight"] = 2500, 		["type"] = "item", 		["image"] = "checkbook.png", 		["unique"] = false, 		["useable"] = true, 	["shouldClose"] = true,   	["combinable"] = nil,   ["description"] = ""},
 ["czlaptop"] 	   = {["name"] = "czlaptop",        	["label"] = "Slow Laptop",	 			["weight"] = 2500, 		["type"] = "item", 		["image"] = "laptop.png", 			["unique"] = false, 		["useable"] = true, 	["shouldClose"] = true,   	["combinable"] = nil,   ["description"] = ""},
 ["czdesktop"] 	   = {["name"] = "czdesktop",        	["label"] = "Desktop",	 				["weight"] = 2500, 		["type"] = "item", 		["image"] = "czdesktop.png", 		["unique"] = false, 		["useable"] = true, 	["shouldClose"] = true,   	["combinable"] = nil,   ["description"] = ""},
-["mdmonitor"] 	   = {["name"] = "mdmonitor",        	["label"] = "Monitor",	 				["weight"] = 2500, 		["type"] = "item", 		["image"] = "mansionlaptop.png", 	["unique"] = false, 		["useable"] = true, 	["shouldClose"] = true,   	["combinable"] = nil,   ["description"] = ""},
+["czmonitor"] 	   = {["name"] = "czmonitor",        	["label"] = "Monitor",	 				["weight"] = 2500, 		["type"] = "item", 		["image"] = "mansionlaptop.png", 	["unique"] = false, 		["useable"] = true, 	["shouldClose"] = true,   	["combinable"] = nil,   ["description"] = ""},
 ["cztablet"] 	   = {["name"] = "cztablet",        	["label"] = "Tablet",	 				["weight"] = 2500, 		["type"] = "item", 		["image"] = "cztablet.png", 		["unique"] = false, 		["useable"] = true, 	["shouldClose"] = true,   	["combinable"] = nil,   ["description"] = ""},
 ["czspeakers"] 	   = {["name"] = "czspeakers",        	["label"] = "Speakers",	 				["weight"] = 2500, 		["type"] = "item", 		["image"] = "speaker.png", 			["unique"] = false, 		["useable"] = true, 	["shouldClose"] = true,   	["combinable"] = nil,   ["description"] = ""},
-["darklaptop"] 	   = {["name"] = "darklaptop",        	["label"] = "Laptop",	 			["weight"] = 700, 		["type"] = "item", 		["image"] = "laptop.png", 			["unique"] = true, 		["useable"] = true, 	["shouldClose"] = true,   	["combinable"] = nil,   ["description"] = "this laptop need vpn to make it work"},
-["vpn"] 	   = {["name"] = "vpn",        	["label"] = "VPN",	 			["weight"] = 700, 		["type"] = "item", 		["image"] = "vpn.png", 			["unique"] = true, 		["useable"] = false, 	["shouldClose"] = false,   	["combinable"] = nil,   ["description"] = "vpn for good use"},
 
 
 ```
 **step 3**
 
-- Add items images to your inventory script 
+- Add images of items to your inventory script
 
 
 
 **step 4**
 
-- Modify `Cz-houserobberies/config.lua` to your liking
+- Customize `Cz-houserobberies/config.lua` according to your preferences.
 
-**step 5**
-
-- edit the following function
-
-	- head to `Cz-houserobberies/client/main.lua` **27** and change to what you use for police alert
-	- if you dont, your people will be annoyed
+- Enjoy !
 	
 
 

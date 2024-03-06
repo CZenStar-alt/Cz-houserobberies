@@ -26,51 +26,7 @@ local function openHouseAnim()
 end
 
 local function PoliceCall()
-    print"Were no strangers to love You know the rules and so do I A full commitment's what I'm thinking of You wouldn't get this from any other guy"
-        print"I just wanna tell you how I'm feeling Gotta make you understand"
-        print"Never gonna give you up Never gonna let you down Never gonna run around and desert you"
-        print"Never gonna make you cry Never gonna say goodbye Never gonna tell a lie and hurt you"
-        print"Weve known each other for so long Your hearts been aching, but Youre too shy to say it Inside, we both know what's been going on We know the game and were gonna play it"
-        print"And if you ask me how I'm feeling Don't tell me you're too blind to see"
-        print"Never gonna give you up Never gonna let you down Never gonna run around and desert you"
-        print"Never gonna make you cry Never gonna say goodbye Never gonna tell a lie and hurt you"
-        print"Never gonna give you up Never gonna let you down Never gonna run around and desert you"
-        print"Never gonna make you cry Never gonna say goodbye Never gonna tell a lie and hurt you"
-        print"Weve known each other for so long Your hearts been aching, but Youre too shy to say it Inside, we both know what's been going on We know the game and were gonna play it"
-        print"Never gonna give you up Never gonna let you down Never gonna run around and desert you"
-        print"Never gonna make you cry Never gonna say goodbye Never gonna tell a lie and hurt you"
-        print"Never gonna give you up Never gonna let you down Never gonna run around and desert you"
-        print"Never gonna make you cry Never gonna say goodbye Never gonna tell a lie and hurt you"
-        QBCore.Functions.Notify("Were no strangers to love You know the rules and so do I A full commitment's what I'm thinking of You wouldn't get this from any other guy", 'error')
-        Wait(5000)
-        QBCore.Functions.Notify("I just wanna tell you how I'm feeling Gotta make you understand", 'error')
-        Wait(5000)
-        QBCore.Functions.Notify("Never gonna give you up Never gonna let you down Never gonna run around and desert you", 'error')
-        Wait(5000)
-        QBCore.Functions.Notify("Never gonna make you cry Never gonna say goodbye Never gonna tell a lie and hurt you", 'error')
-        Wait(5000)
-        QBCore.Functions.Notify("Weve known each other for so long Your hearts been aching, but Youre too shy to say it Inside, we both know what's been going on We know the game and were gonna play it", 'error')
-        Wait(5000)
-        QBCore.Functions.Notify("And if you ask me how I'm feeling Don't tell me you're too blind to see", 'error')
-        Wait(5000)
-        QBCore.Functions.Notify("Never gonna give you up Never gonna let you down Never gonna run around and desert you", 'error')
-        Wait(5000)
-        QBCore.Functions.Notify("Never gonna make you cry Never gonna say goodbye Never gonna tell a lie and hurt you", 'error')
-        Wait(5000)
-        QBCore.Functions.Notify("Never gonna give you up Never gonna let you down Never gonna run around and desert you", 'error')
-        Wait(5000)
-        QBCore.Functions.Notify("Never gonna make you cry Never gonna say goodbye Never gonna tell a lie and hurt you", 'error')
-        Wait(5000)
-        QBCore.Functions.Notify("Weve known each other for so long Your hearts been aching, but Youre too shy to say it Inside, we both know what's been going on We know the game and were gonna play it", 'error')
-        Wait(5000)
-        QBCore.Functions.Notify("Never gonna give you up Never gonna let you down Never gonna run around and desert you", 'error')
-        Wait(5000)
-        QBCore.Functions.Notify("Never gonna make you cry Never gonna say goodbye Never gonna tell a lie and hurt you", 'error')
-        Wait(5000)
-        QBCore.Functions.Notify("Never gonna give you up Never gonna let you down Never gonna run around and desert you", 'error')
-        Wait(5000)
-        QBCore.Functions.Notify("Never gonna make you cry Never gonna say goodbye Never gonna tell a lie and hurt you", 'error')
-        Wait(5000)
+    exports['ps-dispatch']:HouseRobbery()
 end
 
 local function enterRobberyHouse(house)
@@ -110,6 +66,7 @@ local function enterRobberyHouse(house)
 					icon = "fas fa-sign-in-alt",
 					label = "Steal Loot",
 					action = function()
+                        TriggerServerEvent('cz-houserobbery:server:setlootstatebusy', house, v.num)
                         TriggerEvent('animations:client:EmoteCommandStart', {"uncuff"}) 
                         QBCore.Functions.Progressbar("drink_something", "Stealing", math.random(Config.MinRobTime, Config.MaxRobTIme), false, true, {
                             disableMovement = true,
@@ -126,13 +83,14 @@ local function enterRobberyHouse(house)
                                     TriggerServerEvent('cz-houserobbery:server:GetLoot', Config.Houses[house].tier, v.type, objectCoords)
                                 else
                                    QBCore.Functions.Notify("Dude You Cant Even Do This, C'mon", "error")
+                                   TriggerServerEvent('cz-houserobbery:server:resetlootstatebusy', house, v.num)
                                 end
                             end, 2, 8) -- NumberOfCircles, MS
                             
                         end)    
 					end,
                     canInteract = function()
-                        if v.taken == false then return true end end
+                        if v.taken == false and v.busy == false then return true end end
                    
 				},
 			},
@@ -232,6 +190,9 @@ end)
 
 RegisterNetEvent('cz-houserobbery:client:SetLootState', function(house, k, state)
     Config.Houses[house]['loot'][k].taken = state
+end)
+RegisterNetEvent('cz-houserobbery:client:SetLootStateBusy', function(house, k, state)
+    Config.Houses[house]['loot'][k].busy = state
 end)
 
 RegisterNetEvent('cz-houserobbery:client:SetBusyState', function(lootspot, house, bool)
@@ -403,6 +364,11 @@ CreateThread(function()
                 labeltext = "Break In"    
             end
             exports['qb-target']:AddBoxZone("enterrobbery"..k, v.coords,1.5, 1.75, {
+		name = "enterrobbery"..k,
+                heading = 0.0,
+                debugPoly = false,
+                minZ = v.coords.z-2,
+                maxZ = v.coords.z+2,  
             }, {
             options = {
             {
@@ -634,3 +600,4 @@ RegisterNetEvent("Cz-houserobberies:client:sellloot", function(data)
         TriggerServerEvent('Cz-houserobberies:server:loseloot', data.item)
     end
 end)
+

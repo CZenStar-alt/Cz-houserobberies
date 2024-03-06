@@ -13,6 +13,7 @@ local function Resetobject(house)
     CreateThread(function()
         Wait(Config.HouseTimer * 60000)
          Config.Houses[house]['loot'].taken = false
+         Config.Houses[house]['loot'].busy = false
         TriggerClientEvent('cz-houserobbery:client:ResetHouseState', -1, house, k, false)
     end)
 end
@@ -104,6 +105,21 @@ RegisterNetEvent('cz-houserobbery:server:setlootused', function(house, k)
         TriggerClientEvent('cz-houserobbery:client:SetLootState', -1, house, k, true)
     end
     Config.Houses[house]['loot'][k].taken = true
+end)
+RegisterNetEvent('cz-houserobbery:server:setlootstatebusy', function(house, k)
+    local src = source 
+    if not Config.Houses[house]['loot'][k].busy then
+        TriggerClientEvent('cz-houserobbery:client:SetLootStateBusy', -1, house, k, true)
+    end
+    Config.Houses[house]['loot'][k].busy = true
+end)
+
+RegisterNetEvent('cz-houserobbery:server:resetlootstatebusy', function(house, k)
+    local src = source 
+    if  Config.Houses[house]['loot'][k].busy then
+        TriggerClientEvent('cz-houserobbery:client:reSetLootStateBusy', -1, house, k, false)
+    end
+    Config.Houses[house]['loot'][k].busy = false
 end)
 
 RegisterNetEvent('cz-houserobbery:server:GetLoot', function(tier, rewardtype, objectCoords)
